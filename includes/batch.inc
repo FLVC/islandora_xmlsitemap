@@ -82,7 +82,7 @@ function islandora_xmlsitemap_batch_operation($jump, $cutoff, &$context) {
   $qp->solrStart = $sandbox['offset'];
 
   // Query for $count PIDs, starting from $offset.
-  $qp->executeQuery(FALSE, TRUE);
+  $qp->executeQuery(FALSE);
   $results = $qp->islandoraSolrResult;
 
   $sandbox['total'] = $cutoff > 0 ?
