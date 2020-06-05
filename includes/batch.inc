@@ -73,6 +73,11 @@ function islandora_xmlsitemap_batch_operation($jump, $cutoff, &$context) {
       module_load_include('inc', 'islandora', 'includes/utilities');
       $qp->solrParams['fq'][] = implode(' OR ', array_map($namespace_map, islandora_get_allowed_namespaces()));
     }
+
+    $base_filters = preg_split("/\\r\\n|\\n|\\r/", variable_get('islandora_solr_base_filter', ''), -1, PREG_SPLIT_NO_EMPTY);
+    if (!empty($base_filters)) {
+      $qp->solrParams['fq'] = array_merge($qp->solrParams['fq'], $base_filters);
+    }
   }
   else {
     $sandbox['offset'] += $jump;
